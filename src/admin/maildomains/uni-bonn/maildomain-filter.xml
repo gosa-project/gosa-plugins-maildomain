@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>maildomains</category>
+    <template>maildomain-filter.tpl</template>
+    <initial>true</initial>
+  </definition>
+
+  <search>
+    <default>default</default>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=domainRelatedObject)$MAILDOMAIN)</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>ou</attribute>
+      <attribute>associatedDomain</attribute>
+      <attribute>description</attribute>
+    </query>
+    <scope>auto</scope>
+  </search>
+
+  <element>
+    <type>textfield</type>
+    <tag>MAILDOMAIN</tag>
+    <size>20</size>
+    <maxlength>60</maxlength>
+    <default></default>
+    <unset></unset>
+    <set>(ou=*$*)</set>
+    <autocomplete>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=domainRelatedObject)(ou=*$MAILDOMAIN*))</filter>
+      <attribute>ou</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </element>
+
+</filterdef>
