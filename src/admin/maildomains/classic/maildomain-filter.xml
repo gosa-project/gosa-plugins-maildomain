@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<filterdef>
+  <definition>
+    <category>maildomains</category>
+    <initial>true</initial>
+    <scope>auto</scope>
+    <default>default</default>
+    <attribute>dn</attribute>
+    <attribute>objectClass</attribute>
+    <attribute>ou</attribute>
+    <attribute>associatedDomain</attribute>
+    <attribute>description</attribute>
+  </definition>
+
+  <search>
+    <tag>default</tag>
+    <label>Default filter</label>
+    <query>
+      <backend>LDAP</backend>
+      <filter>(&amp;(objectClass=domainRelatedObject)(ou=$))</filter>
+    </query>
+    <autocomplete>
+      <attribute>ou</attribute>
+      <frequency>0.5</frequency>
+      <characters>3</characters>
+    </autocomplete>
+  </search>
+</filterdef>
