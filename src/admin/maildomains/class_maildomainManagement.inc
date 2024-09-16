@@ -25,7 +25,8 @@ class maildomainManagement extends management
     var $plHeadline     = "Mail Domains";
     var $plDescription  = "Mail domain management.";
     var $plIcon         = "plugins/departments/images/domain.png";
-    var $matIcon        = "domain";
+    //var $matIcon      = "domain";
+    var $matIcon        = "bi-envelope-at";
 
     // Tab definition
     protected $tabClass = "maildomaintabs";
