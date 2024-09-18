@@ -47,6 +47,7 @@ class maildomaintabs extends tabs
                 $obj->ou                        = $baseobject->ou;
                 $obj->assocaitedDomain          = $baseobject->associatedDomain;
                 $obj->description               = $baseobject->description;
+                $obj->businessCategory          = $baseobject->businessCategory;
 
                 $this->by_object[$name] = $obj;
             }

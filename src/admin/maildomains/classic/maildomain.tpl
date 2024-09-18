@@ -38,6 +38,22 @@
         <tr>
           <td colspan="2"><hr><br></td>
         </tr>
+
+        <tr>
+          <td>{t}Category{/t}</td>
+          <td>
+{render acl=$businessCategoryACL}
+          <input type="radio" id="maildomainActive" name="businessCategory" value="ACTIVE" {$maildomainActive_checked} />
+          <label for="maildomainActive">{t}Actively maintained email domain{/t}</label>
+          <br />
+          <input type="radio" id="maildomainRetired" name="businessCategory"  value="RETIRED" {$maildomainRetired_checked} />
+          <label for="maildomainRetired">{t}Retired email domain{/t}</label>
+          <br />
+          <input type="checkbox" id="maildomainUnknown" name="businessCategoryUnknown" value="UNKNOWN" {$maildomainUnknown_checked} />
+          <label for="maildomainUnknown">{t}Unknown in email system{/t}</label>
+{/render}
+          </td>
+        </tr>
       </table>
 
     </td>

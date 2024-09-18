@@ -24,6 +24,22 @@
       </div>
       {/render}
 
+      {render acl=$businessCategoryACL}
+      <div class="input-field">
+        <label>{t}Category{/t}</label>
+        <div>
+          <input type="radio" id="maildomainActive" name="businessCategory" value="ACTIVE" {$maildomainActive_checked} />
+          <label for="maildomainActive">{t}Actively maintained email domain{/t}</label>
+          <br />
+          <input type="radio" id="maildomainRetired" name="businessCategory"  value="RETIRED" {$maildomainRetired_checked} />
+          <label for="maildomainRetired">{t}Retired email domain{/t}</label>
+          <br />
+          <input type="checkbox" id="maildomainUnknown" name="businessCategoryUnknown" value="UNKNOWN" {$maildomainUnknown_checked} />
+          <label for="maildomainUnknown">{t}Unknown in email system{/t}</label>
+        </div>
+      </div>
+      {/render}
+
     </div>
   </div>
 </div>
