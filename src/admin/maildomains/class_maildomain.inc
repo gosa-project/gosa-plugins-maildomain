@@ -278,7 +278,6 @@ class maildomain extends plugin
         // Check if a wrong base was supplied
         if (!$this->baseSelector->checkLastBaseUpdate()) {
             $message[]= msgPool::check_base();
-            ;
         }
 
         // Set new acl base
