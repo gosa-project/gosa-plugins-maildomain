@@ -26,6 +26,8 @@ class maildomain extends plugin
     public $ou= "";
     public $associatedDomain = "";
     public $description= "";
+    public $businessCategory= [];
+    public $businessCategoryUnknown= false;
 
     // The object's base
     public $base= "";
@@ -45,7 +47,7 @@ class maildomain extends plugin
     public $objectclasses= array("top", "organizationalUnit", "domainRelatedObject");
 
     // A list of attributes managed by this class
-    public $attributes= array("ou", "associatedDomain", "description", );
+    public $attributes= array("ou", "associatedDomain", "description", "businessCategory");
 
 
     public function __construct(&$config, $dn= null)
@@ -122,9 +124,35 @@ class maildomain extends plugin
             $smarty->assign($name."ACL", $this->getacl($name));
         }
 
+        /* Get list of set tags (via businessCategory) */
+        if (isset($this->attrs['businessCategory'])) {
+            $this->businessCategory = array();
+            for ($i = 0; $i < $this->attrs['businessCategory']['count']; $i++) {
+                if (trim($this->attrs['businessCategory'][$i]) !== "") {
+                    $this->businessCategory[] = trim($this->attrs['businessCategory'][$i]);
+                }
+            }
+        }
+
         // Assign variables
         $smarty->assign("bases", $this->get_allowed_bases());
         $smarty->assign("base_select", $this->base);
+
+        $maildomainActive  = "";
+        $maildomainRetired = "";
+        $maildomainUnknown = "";
+        if (in_array("ACTIVE", $this->businessCategory)) {
+            $maildomainActive  = "checked";
+        }
+        else if (in_array("RETIRED", $this->businessCategory)) {
+            $maildomainRetired = "checked";
+        }
+        if (in_array("UNKNOWN", $this->businessCategory)) {
+            $maildomainUnknown = "checked";
+        }
+        $smarty->assign("maildomainActive_checked",  $maildomainActive);
+        $smarty->assign("maildomainRetired_checked", $maildomainRetired);
+        $smarty->assign("maildomainUnknown_checked", $maildomainUnknown);
 
         // Fields
         foreach ($this->attributes as $val) {
@@ -147,7 +175,28 @@ class maildomain extends plugin
         // Sync ou value to associatedMailDomain value...
         $this->associatedDomain = $this->ou;
 
+        // Process mail domain categories
+        $businessCategory = array();
+
+        if (isset($_POST['businessCategory'])) {
+            $bc = get_post('businessCategory');
+            if (is_array($bc)) {
+                $businessCategory = $bc;
+            } else {
+                $businessCategory[] = $bc;
+            }
+        }
+        if (isset($_POST['businessCategoryUnknown'])) {
+            $bcu = get_post('businessCategoryUnknown');
+            if (!in_array($bcu, $businessCategory)) {
+                $businessCategory[] = $bcu;
+            }
+        }
+
         parent::save_object();
+
+        $this->businessCategory = set_post($businessCategory);
+
         if (isset($_POST['base'])) {
             $this->base = get_post('base');
         }
@@ -309,6 +358,7 @@ class maildomain extends plugin
                         "associatedDomain"  => _("Mail Domain"),
                         "description"       => _("Description"),
                         "base"              => _("Base"),
+                        "businessCategory"  => _("Category"),
                     ),
         ));
     }
