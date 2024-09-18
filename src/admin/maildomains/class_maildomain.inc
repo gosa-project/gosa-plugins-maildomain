@@ -190,12 +190,14 @@ class maildomain extends plugin
             $smarty->assign("$val", set_post($this->$val));
         }
 
-        // read-only attributes
-        foreach ($this->readonly_attributes as $attr) {
-            if (str_ends_with($attr, "Timestamp")) {
-                $smarty->assign($attr, date("d.m.Y H:i:s", strtotime($this->$attr)));
-            } else {
-                $smarty->assign($attr, $this->$attr);
+        if ($this->dn != "new") {
+            // read-only attributes
+            foreach ($this->readonly_attributes as $attr) {
+                if (str_ends_with($attr, "Timestamp")) {
+                    $smarty->assign($attr, date("d.m.Y H:i:s", strtotime($this->$attr)));
+                } else {
+                    $smarty->assign($attr, $this->$attr);
+                }
             }
         }
 
