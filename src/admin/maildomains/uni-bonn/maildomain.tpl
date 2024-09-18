@@ -8,7 +8,7 @@
       <div class="row mb-1">
         <label for="cn" class="col-sm-3 col-form-label">{t}Mail domain{/t}{$must}</label>
         <div class="col-sm-9 input-field">
-          <input type="text" id="ou" name="ou"  value="{$ou}" class="form-control">
+          <input type="text" id="ou" name="ou"  value="{$ou}" class="form-control" {if $is_new == "false"}disabled=""{/if}>
         </div>
       </div>
       {/render}
