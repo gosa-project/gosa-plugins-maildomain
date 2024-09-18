@@ -313,6 +313,7 @@ class maildomain extends plugin
         return ($ret);
     }
 
+
     public function remove_from_parent()
     {
         plugin::remove_from_parent();
@@ -362,6 +363,7 @@ class maildomain extends plugin
                     ),
         ));
     }
+
 
     /*
      * Define properties (saved in LDAP as 'gosaSettings' or in gosa.conf).
