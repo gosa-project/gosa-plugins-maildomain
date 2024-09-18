@@ -1,6 +1,7 @@
 <div class="container-fluid content-wrapper card-content-scroll">
   <div class="row content">
     <div class="col-sm-6">
+
       <h2>{t}Generic{/t}</h2>
 
       {render acl=$ouACL}
