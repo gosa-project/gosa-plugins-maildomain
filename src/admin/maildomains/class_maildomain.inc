@@ -155,12 +155,17 @@ class maildomain extends plugin
             $smarty->assign($name."ACL", $this->getacl($name));
         }
 
-        /* Get list of set tags (via businessCategory) */
-        if (isset($this->attrs['businessCategory'])) {
+        if ($this->dn == "new") {
             $this->businessCategory = array();
-            for ($i = 0; $i < $this->attrs['businessCategory']['count']; $i++) {
-                if (trim($this->attrs['businessCategory'][$i]) !== "") {
-                    $this->businessCategory[] = trim($this->attrs['businessCategory'][$i]);
+            $this->businessCategory[] = "ACTIVE";
+        } else {
+            /* Get list of set tags (via businessCategory) */
+            if (isset($this->attrs['businessCategory'])) {
+                $this->businessCategory = array();
+                for ($i = 0; $i < $this->attrs['businessCategory']['count']; $i++) {
+                    if (trim($this->attrs['businessCategory'][$i]) !== "") {
+                        $this->businessCategory[] = trim($this->attrs['businessCategory'][$i]);
+                    }
                 }
             }
         }
