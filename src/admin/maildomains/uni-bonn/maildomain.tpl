@@ -64,5 +64,49 @@
 
     </div>
 
+    <div class="col-sm-6">
+
+      <h2>{t}Administrative Information{/t}</h2>
+
+      <div class="row mb-1">
+        <label for="createTimestamp_" class="col-sm-4 col-form-label">{t}Creation date{/t}</label>
+        <div class="col-sm-8 input-field">
+          {render acl=$createTimestampACL}
+            <input type="text" id="createTimestamp_" name="createTimestamp_" maxlength="60"
+            value="{$createTimestamp|escape}" disabled="" class="form-control">
+          {/render}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <label for="creatorsName_" class="col-sm-4 col-form-label">{t}Created by{/t}</label>
+        <div class="col-sm-8 input-field">
+          {render acl=$creatorsNameACL}
+            <input type="text" id="creatorsName_" name="creatorsName_" maxlength="60" value="{$creatorsName}" disabled="" class="form-control">
+          {/render}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <label for="modifyTimestamp_" class="col-sm-4 col-form-label">{t}Last modified{/t}</label>
+        <div class="col-sm-8 input-field">
+          {render acl=$modifyTimestampACL}
+            <input type="text" id="modifyTimestamp_" name="modifyTimestamp_" maxlength="60"
+            value="{$modifyTimestamp}" disabled="" class="form-control">
+          {/render}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <label for="modifiersName_" class="col-sm-4 col-form-label">{t}Last changed by{/t}</label>
+        <div class="col-sm-8 input-field">
+          {render acl=$modifiersNameACL}
+            <input type="text" id="modifiersName_" name="modifiersName_" maxlength="60" value="{$modifiersName}" disabled="" class="form-control">
+          {/render}
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
