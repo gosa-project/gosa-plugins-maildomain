@@ -73,6 +73,16 @@ class maildomain extends plugin
 
         $this->is_account= true;
 
+        /* Get list of set tags (via businessCategory) */
+        if (isset($this->attrs['businessCategory'])) {
+            $this->businessCategory = array();
+            for ($i = 0; $i < $this->attrs['businessCategory']['count']; $i++) {
+                if (trim($this->attrs['businessCategory'][$i]) !== "") {
+                    $this->businessCategory[] = trim($this->attrs['businessCategory'][$i]);
+                }
+            }
+        }
+
         // Set base
         if ($this->dn == "new") {
             $ui = get_userinfo();
