@@ -64,6 +64,7 @@
 
     </div>
 
+    {if $is_new == "false"}
     <div class="col-sm-6">
 
       <h2>{t}Administrative Information{/t}</h2>
@@ -107,6 +108,7 @@
       </div>
 
     </div>
+    {/if}
 
   </div>
 </div>
