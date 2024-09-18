@@ -50,6 +50,11 @@ class maildomain extends plugin
     public $attributes= array("ou", "associatedDomain", "description", "businessCategory");
 
 
+    public $readonly_attributes = array(
+        "createTimestamp", "creatorsName", "modifyTimestamp", "modifiersName"
+    );
+
+
     public function __construct(&$config, $dn= null)
     {
         $this->theme = getThemeName();
@@ -72,6 +77,22 @@ class maildomain extends plugin
         $this->orig_dn= $dn;
 
         $this->is_account= true;
+
+        /* Get read only attributes.
+         * For some reason plugin::plugin doesn't fetch
+         * attributes like 'modifyTimestamp'. So we've to
+         * fetch them manually.
+         */
+        $ldap = $config->get_ldap_link();
+        $ldap->cat($this->dn, $this->readonly_attributes);
+        if ($ldap->count()) {
+            $attrs = $ldap->fetch();
+            foreach ($this->readonly_attributes as $attr) {
+                if (isset($attrs[$attr])) {
+                    $this->$attr = $attrs[$attr][0];
+                }
+            }
+        }
 
         /* Get list of set tags (via businessCategory) */
         if (isset($this->attrs['businessCategory'])) {
@@ -167,6 +188,15 @@ class maildomain extends plugin
         // Fields
         foreach ($this->attributes as $val) {
             $smarty->assign("$val", set_post($this->$val));
+        }
+
+        // read-only attributes
+        foreach ($this->readonly_attributes as $attr) {
+            if (str_ends_with($attr, "Timestamp")) {
+                $smarty->assign($attr, date("d.m.Y H:i:s", strtotime($this->$attr)));
+            } else {
+                $smarty->assign($attr, $this->$attr);
+            }
         }
 
         return ($smarty->fetch(get_template_path('maildomain.tpl', true)));
@@ -369,6 +399,10 @@ class maildomain extends plugin
                         "description"       => _("Description"),
                         "base"              => _("Base"),
                         "businessCategory"  => _("Category"),
+                        "createTimestamp"   => _("Creation Timestap"),
+                        "creatorsName"      => _("Creator's Name"),
+                        "modifyTimestamp"   => _("Modification Timestap"),
+                        "modifiersName"     => _("Modifier's Name"),
                     ),
         ));
     }
