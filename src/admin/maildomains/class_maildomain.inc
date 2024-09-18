@@ -201,6 +201,9 @@ class maildomain extends plugin
             }
         }
 
+        // Is new?
+        $smarty->assign("is_new", $this->dn == "new" ? "true" : "false");
+
         return ($smarty->fetch(get_template_path('maildomain.tpl', true)));
     }
 
