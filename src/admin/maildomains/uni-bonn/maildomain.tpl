@@ -21,7 +21,7 @@
       </div>
       {/render}
 
-      <div class="row mb-1 base-image">
+      <div class="row mb-5 base-image">
         <label for="base" class="col-sm-3 col-form-label">{t}Base{/t}</label>
         <div class="col-sm-9 input-field">
           <div class="add one-line">
@@ -40,6 +40,26 @@
           </div>
         </div>
       </div>
+
+      {render acl=$businessCategoryACL}
+      <div class="row mb-1">
+        <label class="col-sm-3 col-form-label">{t}Category{/t}</label>
+        <div class="col-sm-9 form-check">
+          <input class="form-radio-input" type="radio" id="maildomainActive" name="businessCategory" value="ACTIVE" {$maildomainActive_checked} />
+          <label for="maildomainActive">{t}Actively maintained email domain{/t}</label>
+          <br />
+          <input class="form-radio-input" type="radio" id="maildomainRetired" name="businessCategory"  value="RETIRED" {$maildomainRetired_checked} />
+          <label for="maildomainRetired">{t}Retired email domain{/t}</label>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9 form-check">
+          <input class="form-radio-input" type="checkbox" id="maildomainUnknown" name="businessCategoryUnknown" value="UNKNOWN" {$maildomainUnknown_checked} />
+          <label for="maildomainUnknown">{t}Unknown in email system{/t}</label>
+        </div>
+      </div>
+      {/render}
 
     </div>
 
