@@ -58,19 +58,6 @@ class maildomain extends plugin
     public function __construct(&$config, $dn= null)
     {
         $this->theme = getThemeName();
-        switch ($this->theme) {
-            case 'classic':
-                $this->typeToImage = array(
-                    "D" => "plugins/departments/images/domain.png",
-                );
-                break;
-
-            default:
-                $this->typeToImage = array(
-                    "D" => "<i class='material-icons'>domain</i>",
-                );
-                break;
-        }
 
         plugin::__construct($config, $dn);
 
