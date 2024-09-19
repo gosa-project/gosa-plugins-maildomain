@@ -66,11 +66,10 @@ class maildomain extends plugin
 
         $this->is_account= true;
 
-        /* Get read only attributes.
-         * For some reason plugin::plugin doesn't fetch
-         * attributes like 'modifyTimestamp'. So we've to
-         * fetch them manually.
-         */
+        // Get read only attributes.
+        // For some reason plugin::plugin doesn't fetch
+        // attributes like 'modifyTimestamp'. So we've to
+        // fetch them manually.
         $ldap = $config->get_ldap_link();
         $ldap->cat($this->dn, $this->readonly_attributes);
         if ($ldap->count()) {
@@ -82,7 +81,7 @@ class maildomain extends plugin
             }
         }
 
-        /* Get list of set tags (via businessCategory) */
+        // Get list of set tags (via businessCategory)
         if (isset($this->attrs['businessCategory'])) {
             $this->businessCategory = array();
             for ($i = 0; $i < $this->attrs['businessCategory']['count']; $i++) {
