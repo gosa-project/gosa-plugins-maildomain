@@ -158,8 +158,7 @@ class maildomain extends plugin
         }
 
         // Assign variables
-        $smarty->assign("bases", $this->get_allowed_bases());
-        $smarty->assign("base_select", $this->base);
+        $smarty->assign("base", $this->baseSelector->render());
 
         $maildomainActive  = "";
         $maildomainRetired = "";
