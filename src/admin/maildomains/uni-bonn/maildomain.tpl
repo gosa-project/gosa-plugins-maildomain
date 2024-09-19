@@ -97,6 +97,16 @@
           {/render}
         </div>
       </div>
+
+      <div class="row mb-1">
+        <label for="countMaildomainUsage_" class="col-sm-4 col-form-label">{t}Mail addresses in this domain{/t}</label>
+        <div class="col-sm-8 input-field">
+          {render acl=$countMaildomainUsageACL}
+            <input type="text" id="modifiersName_" name="countMaildomainUsage_" maxlength="60" value="{$countMaildomainUsage}" disabled="" class="form-control">
+          {/render}
+        </div>
+      </div>
+
     </div>
 
     {/if}
