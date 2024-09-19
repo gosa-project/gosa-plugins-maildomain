@@ -119,7 +119,6 @@ class maildomain extends plugin
     {
         // Call parent execute
         plugin::execute();
-
         if (!$this->view_logged) {
             $this->view_logged = true;
             new log("view", "maildomains/".get_class($this), $this->dn);
@@ -431,15 +430,15 @@ class maildomain extends plugin
                         )
                     ),
                     "plProvidedAcls"=> array(
-                        "ou"                => _("Organizational Unit"),
-                        "associatedDomain"  => _("Mail Domain"),
-                        "description"       => _("Description"),
-                        "base"              => _("Base"),
-                        "businessCategory"  => _("Category"),
-                        "createTimestamp"   => _("Creation Timestap"),
-                        "creatorsName"      => _("Creator's Name"),
-                        "modifyTimestamp"   => _("Modification Timestap"),
-                        "modifiersName"     => _("Modifier's Name"),
+                        "ou"                   => _("Organizational Unit"),
+                        "associatedDomain"     => _("Mail Domain"),
+                        "description"          => _("Description"),
+                        "base"                 => _("Base"),
+                        "businessCategory"     => _("Category"),
+                        "createTimestamp"      => _("Creation Timestap"),
+                        "creatorsName"         => _("Creator's Name"),
+                        "modifyTimestamp"      => _("Modification Timestap"),
+                        "modifiersName"        => _("Modifier's Name"),
                         "countMaildomainUsage" => _("Mail addresses used in this domain"),
                     ),
         ));
