@@ -26,6 +26,13 @@
       {/render}
       {/if}
 
+      {render acl=$countMaildomainUsageACL}
+      <div class="input-field">
+        <input type='text' value='{$countMaildomainUsage}' name='countMaildomainUsage' disabled="" id="description">
+        <label for="countMaildomainUsage">{t}Mail addresses used in this domain{/t}</label>
+      </div>
+      {/render}
+
       {render acl=$businessCategoryACL}
       <div class="input-field">
         <label>{t}Category{/t}</label>

@@ -29,6 +29,8 @@ class maildomain extends plugin
     public $businessCategory= [];
     public $businessCategoryUnknown= false;
 
+    public $countMaildomainUsage;
+
     // The object's base
     public $base= "";
 
@@ -144,6 +146,7 @@ class maildomain extends plugin
         foreach ($tmp['plProvidedAcls'] as $name => $translation) {
             $smarty->assign($name."ACL", $this->getacl($name));
         }
+        $smarty->assign($name."ACL", $this->getacl($name));
 
         if ($this->dn == "new") {
             $this->businessCategory = array();
@@ -197,6 +200,19 @@ class maildomain extends plugin
                 }
             }
         }
+
+        // Search LDAP tree for mail / alias attributes using
+        // this object's associatedDomain and detect how many
+        // accounts have a mail address in this domain.
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->base);
+        $md = $this->associatedDomain;
+        $ldap->search("(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))", array("uid"));
+        $this->countMaildomainUsage = $ldap->count();
+
+        // How many users have a mailaddress in this mail domain?
+        $smarty->assign("countMaildomainUsage", $this->countMaildomainUsage);
+        $smarty->assign("countMaildomainUsageACL", $this->getacl("countMaildomainUsage"));
 
         // Is new?
         $smarty->assign("is_new", $this->dn == "new" ? "true" : "false");
@@ -424,6 +440,7 @@ class maildomain extends plugin
                         "creatorsName"      => _("Creator's Name"),
                         "modifyTimestamp"   => _("Modification Timestap"),
                         "modifiersName"     => _("Modifier's Name"),
+                        "countMaildomainUsage" => _("Mail addresses used in this domain"),
                     ),
         ));
     }
