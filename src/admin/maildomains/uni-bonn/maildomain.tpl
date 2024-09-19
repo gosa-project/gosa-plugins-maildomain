@@ -97,7 +97,17 @@
           {/render}
         </div>
       </div>
+    </div>
 
+    {/if}
+
+    {if $base}
+    <!-- Provide some spacing for baseSelector drop-down menu -->
+    <div class="row mb-5">
+    </div>
+    <div class="row mb-5">
+    </div>
+    <div class="row mb-5">
     </div>
     {/if}
 
