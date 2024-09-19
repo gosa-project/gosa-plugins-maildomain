@@ -18,11 +18,13 @@
       </div>
       {/render}
 
+      {if $base}
       {render acl=$baseACL}
       <div class="input-field ldap-tree">
         {$base}
       </div>
       {/render}
+      {/if}
 
       {render acl=$businessCategoryACL}
       <div class="input-field">

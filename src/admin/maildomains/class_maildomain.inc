@@ -40,6 +40,7 @@ class maildomain extends plugin
     public $view_logged = false;
 
     public $baseSelector;
+    public $maindomainBaseOnly= false;
 
     var $theme;
 
@@ -90,6 +91,9 @@ class maildomain extends plugin
                 }
             }
         }
+
+        // maildomains at BaseDN only?
+        $this->maildomainBaseOnly = ($config->get_cfg_value('core', 'maildomainBaseOnly') == "true");
 
         // Set base
         if ($this->dn == "new") {
@@ -158,8 +162,10 @@ class maildomain extends plugin
         }
 
         // Assign variables
-        $smarty->assign("bases", $this->get_allowed_bases());
-        $smarty->assign("base_select", $this->base);
+
+        if (!$this->maildomainBaseOnly) {
+            $smarty->assign("base", $this->baseSelector->render());
+        }
 
         $maildomainActive  = "";
         $maildomainRetired = "";
@@ -203,6 +209,26 @@ class maildomain extends plugin
     public function set_acl_base($base)
     {
         plugin::set_acl_base($base);
+    }
+
+
+    public function acl_is_moveable($base = "")
+    {
+        if ($this->maildomainBaseOnly && ($base != $this->config->current['BASE'])) {
+            return FALSE;
+        }
+
+        return parent::acl_is_moveable($base);
+    }
+
+
+    public function acl_is_createable($base = "")
+    {
+        if ($this->maildomainBaseOnly && ($base != $this->config->current['BASE'])) {
+            return FALSE;
+        }
+
+        return parent::acl_is_createable($base);
     }
 
 
@@ -421,6 +447,16 @@ class maildomain extends plugin
                 "migrate"     => "",
                 "mandatory"   => true,
                 "description" => _("RDN for maildomains."),
+            ),
+            array(
+                "name"        => "maildomainBaseOnly",
+                "type"        => "bool",
+                "check"       => "gosaProperty::isBool",
+                "group"       => "core",
+                "default"     => FALSE,
+                "migrate"     => "",
+                "mandatory"   => true,
+                "description" => _("Only allow maildomains at top-level BaseDN."),
             ),
         );
     }
