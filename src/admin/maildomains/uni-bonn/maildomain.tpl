@@ -23,6 +23,7 @@
       {/render}
 
       <div class="row mb-5">
+      {if $base}
         <label for="use_base" class="col-sm-3 col-form-label">{t}Base{/t}{$must}</label>
         <div class="col-sm-9 input-field">
           {render acl=$baseACL}
@@ -30,6 +31,7 @@
           {/render}
         </div>
       </div>
+      {/if}
 
       {render acl=$businessCategoryACL}
       <div class="row mb-1">
