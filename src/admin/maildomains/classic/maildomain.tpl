@@ -23,6 +23,7 @@
 {/render}
           </td>
         </tr>
+{if $base}
         <tr>
           <td>
             <div style="height:10px;"></div>
@@ -35,6 +36,7 @@
 {/render}
           </td>
         </tr>
+{/if}
         <tr>
           <td colspan="2"><hr><br></td>
         </tr>

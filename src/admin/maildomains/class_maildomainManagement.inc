@@ -39,6 +39,7 @@ class maildomainManagement extends management
         $this->config = $config;
         $this->ui = $ui;
 
+        $this->maildomainBaseOnly = ($config->get_cfg_value('core', 'maildomainBaseOnly') == "true");
         $this->storagePoints = array(get_ou("maildomain", "maildomainRDN"));
 
         // Build filter
@@ -51,7 +52,11 @@ class maildomainManagement extends management
         $this->setFilter($filter);
 
         // Build headpage
-        $headpage = new listing(get_template_path("maildomain-list.xml", true));
+        if ($this->maildomainBaseOnly) {
+            $headpage = new listing(get_template_path("maildomain-list-baseonly.xml", true));
+        } else {
+            $headpage = new listing(get_template_path("maildomain-list.xml", true));
+        }
         $headpage->setFilter($filter);
 
         // Add snapshot handler.
