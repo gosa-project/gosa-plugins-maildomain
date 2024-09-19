@@ -56,6 +56,20 @@
 {/render}
           </td>
         </tr>
+
+        <tr>
+          <td colspan="2"><hr><br></td>
+        </tr>
+
+        <tr>
+          <td>{t}Mail addresses used in this domain{/t}</td>
+          <td>
+{render acl=$countMaildomainUsageACL}
+             <input type='text' value='{$countMaildomainUsage}' name='countMaildomainUsage'>
+{/render}
+          </td>
+        </tr>
+
       </table>
 
     </td>
