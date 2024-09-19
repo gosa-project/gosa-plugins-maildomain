@@ -54,6 +54,11 @@
     </column>
 
     <column>
+      <label>#Aliases</label>
+      <value>%{filter:maildomainUsageCounter(dn,ou)}</value>
+    </column>
+
+    <column>
       <label>Actions</label>
       <value>%{filter:actions(dn,row,objectClass)}</value>
     </column>
