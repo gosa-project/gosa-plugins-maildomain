@@ -22,8 +22,8 @@
       </div>
       {/render}
 
-      <div class="row mb-5">
       {if $base}
+      <div class="row mb-1">
         <label for="use_base" class="col-sm-3 col-form-label">{t}Base{/t}{$must}</label>
         <div class="col-sm-9 input-field">
           {render acl=$baseACL}
@@ -34,7 +34,7 @@
       {/if}
 
       {render acl=$businessCategoryACL}
-      <div class="row mb-1">
+      <div class="row mt-4 mb-1">
         <label class="col-sm-3 col-form-label">{t}Category{/t}</label>
         <div class="col-sm-9 form-check">
           <input class="form-radio-input" type="radio" id="maildomainActive" name="businessCategory" value="ACTIVE" {$maildomainActive_checked} />
