@@ -22,23 +22,12 @@
       </div>
       {/render}
 
-      <div class="row mb-5 base-image">
-        <label for="base" class="col-sm-3 col-form-label">{t}Base{/t}</label>
+      <div class="row mb-5">
+        <label for="use_base" class="col-sm-3 col-form-label">{t}Base{/t}{$must}</label>
         <div class="col-sm-9 input-field">
-          <div class="add one-line">
-            {render acl=$baseACL}
-              <select class="form-select" name="base" id="base" title="{t}Choose subtree to place mail domain in{/t}">
-                {html_options options=$bases selected=$base_select}
-              </select>
-            {/render}
-
-            {render acl=$baseACL disable_picture='images/lists/folder_grey.png'}
-              <div class="file-image">
-                <input type="image" id="chooseBase" name="chooseBase" src="images/lists/folder.png" title="{t}Select a base{/t}" class="form-control">
-                <i class="bi bi-folder2-open"></i>
-              </div>
-            {/render}
-          </div>
+          {render acl=$baseACL}
+          {$base}
+          {/render}
         </div>
       </div>
 
