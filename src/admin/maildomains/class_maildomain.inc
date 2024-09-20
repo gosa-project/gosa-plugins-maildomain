@@ -54,7 +54,7 @@ class maildomain extends plugin
 
 
     public $readonly_attributes = array(
-        "createTimestamp", "creatorsName", "modifyTimestamp", "modifiersName"
+        "createTimestamp", "modifyTimestamp"
     );
 
 
@@ -437,9 +437,7 @@ class maildomain extends plugin
                         "base"                 => _("Base"),
                         "businessCategory"     => _("Category"),
                         "createTimestamp"      => _("Creation Timestap"),
-                        "creatorsName"         => _("Creator's Name"),
                         "modifyTimestamp"      => _("Modification Timestap"),
-                        "modifiersName"        => _("Modifier's Name"),
                         "countMaildomainUsage" => _("Mail addresses used in this domain"),
                     ),
         ));
