@@ -71,17 +71,9 @@ class maildomainManagement extends management
 
     static function maildomainUsageCounter($dn, $associatedDomain)
     {
-        global $config;
 
-        // Search LDAP tree for mail / alias attributes using
-        // this object's associatedDomain and detect how many
-        // accounts have a mail address in this domain.
-        $ldap = $config->get_ldap_link();
         $base_of_maildomain = preg_replace ('/^[^,]+,[^,]+,/i', '', $dn);
-        $ldap->cd($base_of_maildomain);
-        $md = $associatedDomain[0];
-        $ldap->search("(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))", array("uid"));
-        return($ldap->count());
+        return(maildomain::maildomain_count_usage($associatedDomain[0], $base_of_maildomain));
     }
 }
 

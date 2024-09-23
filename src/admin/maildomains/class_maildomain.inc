@@ -93,6 +93,8 @@ class maildomain extends plugin
             }
         }
 
+        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
+
         // maildomains at BaseDN only?
         $this->maildomainBaseOnly = ($config->get_cfg_value('core', 'maildomainBaseOnly') == "true");
 
@@ -200,16 +202,8 @@ class maildomain extends plugin
             }
         }
 
-        // Search LDAP tree for mail / alias attributes using
-        // this object's associatedDomain and detect how many
-        // accounts have a mail address in this domain.
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->base);
-        $md = $this->associatedDomain;
-        $ldap->search("(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))", array("uid"));
-        $this->countMaildomainUsage = $ldap->count();
-
         // How many users have a mailaddress in this mail domain?
+        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
         $smarty->assign("countMaildomainUsage", $this->countMaildomainUsage);
         $smarty->assign("countMaildomainUsageACL", $this->getacl("countMaildomainUsage"));
 
@@ -470,6 +464,20 @@ class maildomain extends plugin
                 "description" => _("Only allow maildomains at top-level BaseDN."),
             ),
         );
+    }
+
+
+    public static function maildomain_count_usage($md, $base)
+    {
+        global $config;
+
+        // Search LDAP tree for mail / alias attributes using
+        // this object's associatedDomain and detect how many
+        // accounts have a mail address in this domain.
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($base);
+        $ldap->search("(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))", array("uid"));
+        return ($ldap->count());
     }
 }
 
