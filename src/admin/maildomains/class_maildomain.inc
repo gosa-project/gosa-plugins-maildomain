@@ -20,6 +20,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// variables | code path influencers
+
+global $maildomain_count_users;
+global $maildomain_count_usage;
+$maildomain_count_users = FALSE;
+$maildomain_count_usage = !$maildomain_count_users;
+
+global $maildomain_count_usage_phpldapsearch_counterlimit;
+// Not recommended to go beyond 100 search result array-deep-divings (see below)
+$maildomain_count_usage_phpldapsearch_counterlimit  = 100;
+
 class maildomain extends plugin
 {
     // Variables
@@ -470,14 +481,62 @@ class maildomain extends plugin
     public static function maildomain_count_usage($md, $base)
     {
         global $config;
+        global $maildomain_count_usage;
+        global $maildomain_count_users;
+        global $maildomain_count_usage_phpldapsearch_counterlimit;
 
         // Search LDAP tree for mail / alias attributes using
         // this object's associatedDomain and detect how many
         // accounts have a mail address in this domain.
         $ldap = $config->get_ldap_link();
         $ldap->cd($base);
-        $ldap->search("(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))", array("uid"));
-        return ($ldap->count());
+
+        if ($maildomain_count_users) {
+
+            // Only count LDAP users using a mail address in the given mail domain
+
+            $search_filter = "(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))";
+            $ldap->search($search_filter, array("uid"));
+            return ($ldap->count());
+
+        } elseif ($maildomain_count_usage) {
+
+            // Count mail addresses defined in the given mail domain
+
+            $counter = 0;
+            $counter_limit = $maildomain_count_usage_phpldapsearch_counterlimit;
+
+            $search_attrs = array("mailAlias", "mail", "alias");
+            foreach ($search_attrs as $idx => $attr) {
+
+                $search_filter = "(&(objectClass=gosaAccount)(".$attr."=*@".$md."))";
+                $srp = $ldap->search($search_filter, array($attr));
+
+                // retrieve individual objects of the search result
+                while ($attrs = $ldap->fetch($srp)) {
+
+                    // This part of the code is really CPU expensive and takes a lot of time.
+                    // Array processing in PHP sucks...
+                    $i_max = $attrs['count'];
+                    for ($i = 0; $i <= $i_max; $i++) {
+                        $j_max = $attrs[$attrs[$i]]['count'];
+                        for ($j = 0; $j <= $j_max; $j++) {
+                            $mailaddress = $attrs[$attrs[$i]][$j];
+                            if ($mailaddress !== NULL) {
+                                preg_match('/.*@'.$md.'/', $mailaddress, $matches);
+                                if ($matches[0]) {
+                                    ++$counter;
+                                }
+                            }
+                        }
+                        if ($counter == $counter_limit + 1) {
+                            return (sprintf ("> %d", $counter_limit));
+                        }
+                    }
+                }
+            }
+            return ($counter);
+        }
     }
 }
 
