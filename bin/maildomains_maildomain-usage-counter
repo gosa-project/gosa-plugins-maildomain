@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Copyright (C) 2024 Mike Gabriel <mike.gabriel@das-netzwerkteam.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the
+# Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+
+function usage() {
+	echo "Usage: $(basename $0) -H <ldap_uri> -D <binddn> -b <basedn> <maildomain>" 1>&2
+	exit ${1}
+}
+
+while getopts ":H:D:b:" o; do
+	case "${o}" in
+		H)
+			ldap_uri=${OPTARG}
+			[ -z "${ldap_uri}" ] && usage -3
+		;;
+		b)
+			ldap_basedn=${OPTARG}
+			[ -z "${ldap_basedn}" ] && usage -4
+		;;
+		D)
+			ldap_binddn=${OPTARG}
+			[ -z "${ldap_binddn}" ] && usage -5
+		;;
+		*)
+			usage -2
+		;;
+	esac
+done
+shift $((OPTIND-1))
+
+maildomain="${1}"
+if [ -z "${maildomain}" ]; then
+    usage -1
+fi
+
+# Check to see if a pipe exists on stdin.
+if [ -p /dev/stdin ]; then
+    read ldap_bindpw
+else
+    read -sp "Enter password for '$ldap_binddn': " ldap_bindpw
+fi
+
+if [ -z "${ldap_bindpw}" ]; then
+    echo "LDAP bind password could not be obtained from pipe or interactive input, aborting..." 1>&2
+    exit -6
+fi
+
+ldapsearch -x -H "${ldap_uri}"    \
+              -b "${ldap_basedn}"   \
+              -D "${ldap_binddn}"  \
+              -w "${ldap_bindpw}"  \
+             "(&(objectClass=gosaAccount)(|(mail=*@$maildomain)(mailAlias=*@${maildomain})(alias=*@$maildomain)))" mail alias mailAlias \
+    | grep -E "^(mail|alias|mailAlias): .*@$maildomain" \
+    | wc -l
