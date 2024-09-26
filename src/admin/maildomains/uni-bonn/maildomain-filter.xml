@@ -11,15 +11,40 @@
     <default>default</default>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=domainRelatedObject)$MAILDOMAIN)</filter>
+      <filter>(&amp;(objectClass=domainRelatedObject)$MAILDOMAIN$ACTIVE$RETIRED$UNKNOWN)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>ou</attribute>
       <attribute>associatedDomain</attribute>
       <attribute>description</attribute>
+      <attribute>businessCategory</attribute>
     </query>
     <scope>auto</scope>
   </search>
+
+  <element>
+    <type>checkbox</type>
+    <tag>ACTIVE</tag>
+    <default>true</default>
+    <set>(businessCategory=ACTIVE)</set>
+    <unset></unset>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>RETIRED</tag>
+    <default>true</default>
+    <set>(businessCategory=RETIRED)</set>
+    <unset></unset>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>UNKNOWN</tag>
+    <default>true</default>
+    <set>(businessCategory=UNKNOWN)</set>
+    <unset></unset>
+  </element>
 
   <element>
     <type>textfield</type>

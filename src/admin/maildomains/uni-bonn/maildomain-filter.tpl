@@ -7,6 +7,23 @@
   <hr class="divider">
 
   <div class="filter card-content-scroll">
+    <div class="form-check">
+      {$ACTIVE}
+      <label for="ACTIVE">{t}Maildomain active{/t}</label>
+    </div>
+
+    <div class="form-check">
+      {$RETIRED}
+      <label for="RETIRED">{t}Maildomain retired{/t}</label>
+    </div>
+
+    <div class="form-check">
+      {$UNKNOWN}
+      <label for="UNKNOWN">{t}Maildomain unknown to mailsystem{/t}</label>
+    </div>
+
+    <hr class="divider">
+
     <div class="row">
       <label for="MAILDOMAIN" class="col-sm-6 col-form-label">
         <i class="bi bi-search"></i>Mail Domain
