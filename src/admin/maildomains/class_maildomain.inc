@@ -494,15 +494,15 @@ class maildomain extends plugin
         global $maildomain_count_usage_phpldapsearch_counterlimit;
         global $maildomain_count_usage_externalscript;
 
-        // Search LDAP tree for mail / alias attributes using
-        // this object's associatedDomain and detect how many
-        // accounts have a mail address in this domain.
-        $ldap = $config->get_ldap_link();
-        $ldap->cd($base);
-
         if ($maildomain_count_users) {
 
             // Only count LDAP users using a mail address in the given mail domain
+
+            // Search LDAP tree for mail / alias / mailAlias attributes using
+            // this object's associatedDomain and detect how many accounts have
+            // a mail address in this domain.
+            $ldap = $config->get_ldap_link();
+            $ldap->cd($base);
 
             $search_filter = "(&(objectClass=gosaAccount)(|(mail=*@".$md.")(alias=*@".$md.")(mailAlias=*@".$md.")))";
             $ldap->search($search_filter, array("uid"));
@@ -515,6 +515,12 @@ class maildomain extends plugin
             if ($maildomain_count_usage_phpldapsearch) {
 
                 // Use GOsa²'s class_ldap and deep-dive into the result array (SLOOOWWWWW...)
+
+                // Search LDAP tree for mail / alias / mailAlias attributes using
+                // this object's associatedDomain and detect how many accounts have
+                // a mail address in this domain.
+                $ldap = $config->get_ldap_link();
+                $ldap->cd($base);
 
                 $counter = 0;
                 $counter_limit = $maildomain_count_usage_phpldapsearch_counterlimit;
@@ -554,7 +560,7 @@ class maildomain extends plugin
 
                 $command = array($BASE_DIR."/bin/maildomains_maildomain-usage-counter",
                                  "-H", $config->current['SERVER'],
-                                 "-b", $config->current['BASE'],
+                                 "-b", $base,
                                  "-D", $config->current['ADMINDN'],
                                  $md);
 
