@@ -496,7 +496,6 @@ class maildomain extends plugin
         global $config;
         global $maildomain_category_map;
 
-        var_dump ($maildomain_category_map);
         $ldap = $config->get_ldap_link();
         $ldap->cd($base);
         $search_filter = "(&(objectClass=organizationalUnit)(objectClass=domainRelatedObject)(associatedDomain=".$md."))";
