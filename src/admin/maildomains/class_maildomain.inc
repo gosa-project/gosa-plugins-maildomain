@@ -552,7 +552,7 @@ class maildomain extends plugin
 
                 $command = array($BASE_DIR."/bin/maildomains_maildomain-usage-counter",
                                  "-H", $config->current['SERVER'],
-                                 "-b", $config->current['BASE'],
+                                 "-b", $base,
                                  "-D", $config->current['ADMINDN'],
                                  $md);
 
