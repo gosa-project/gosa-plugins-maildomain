@@ -60,6 +60,7 @@ class maildomainManagement extends management
         $headpage->registerElementFilter("maildomainCategories",   "maildomainManagement::maildomainCategories");
         $headpage->registerElementFilter("maildomainUsageCounter", "maildomainManagement::maildomainUsageCounter");
         $headpage->setFilter($filter);
+        $headpage->update();
 
         // Add snapshot handler.
         if($this->config->get_cfg_value("core","enableSnapshots") == "true"){
