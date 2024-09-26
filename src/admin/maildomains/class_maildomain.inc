@@ -115,8 +115,6 @@ class maildomain extends plugin
             }
         }
 
-        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
-
         // maildomains at BaseDN only?
         $this->maildomainBaseOnly = ($config->get_cfg_value('core', 'maildomainBaseOnly') == "true");
 
@@ -127,6 +125,8 @@ class maildomain extends plugin
         } else {
             $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("maildomain", "maildomainRDN"), '/')."/i", "", $this->dn);
         }
+
+        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
 
         $this->orig_ou = $this->ou;
         $this->orig_base = $this->base;
