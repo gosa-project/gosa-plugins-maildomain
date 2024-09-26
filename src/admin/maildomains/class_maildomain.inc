@@ -617,7 +617,7 @@ class maildomain extends plugin
                     if ($exitCode !== 0) {
                         DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, join(" ", $command), "Execution failed, exit code: ".$exitCode);
                         DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, join(" ", $command), "Error message: ".$stderr);
-                        $message= msgPool::cmdexecfailed($err,$command[0], "maildomains");
+                        $message= msgPool::cmdexecfailed($err,join(" ", $command), "maildomains");
                         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
                         return(_("unknown"));
                     } else {
