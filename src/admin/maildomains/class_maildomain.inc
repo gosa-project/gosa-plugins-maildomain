@@ -35,6 +35,13 @@ global $maildomain_count_usage_phpldapsearch_counterlimit;
 // Not recommended to go beyond 100 search result array-deep-divings (see below)
 $maildomain_count_usage_phpldapsearch_counterlimit  = 100;
 
+global $maildomain_category_map;
+$maildomain_category_map = [
+    "ACTIVE"  => _("active"),
+    "RETIRED" => _("retired"),
+    "UNKNOWN" => _("unknown"),
+];
+
 class maildomain extends plugin
 {
     // Variables
@@ -481,6 +488,35 @@ class maildomain extends plugin
         );
     }
 
+
+    public static function maildomain_categories($md, $base)
+    {
+        global $config;
+        global $maildomain_category_map;
+
+        var_dump ($maildomain_category_map);
+        $ldap = $config->get_ldap_link();
+        $ldap->cd($base);
+        $search_filter = "(&(objectClass=organizationalUnit)(objectClass=domainRelatedObject)(associatedDomain=".$md."))";
+        $srp = $ldap->search($search_filter, array("businessCategory"));
+
+        $attrs = $ldap->fetch($srp);
+        // This part of the code is really CPU expensive and takes a lot of time.
+        // Array processing in PHP sucks...
+        $categories       = [];
+        $categories_short = [];
+
+        if (in_array("businessCategory", $attrs)) {
+            $i_max = $attrs["businessCategory"]["count"];
+            for ($i = 0; $i <= $i_max; $i++) {
+                if ($attrs["businessCategory"][$i][0] !== NULL) {
+                    $categories[]       = $maildomain_category_map[$attrs["businessCategory"][$i]];
+                    $categories_short[] = strtoupper($maildomain_category_map[$attrs["businessCategory"][$i]])[0];
+                }
+            }
+        }
+        return ("<div title=\"".join(", ", $categories)."\">".join("|", $categories_short)."</div>");
+    }
 
     public static function maildomain_count_usage($md, $base)
     {

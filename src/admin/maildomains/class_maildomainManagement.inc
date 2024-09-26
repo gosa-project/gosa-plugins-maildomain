@@ -57,6 +57,7 @@ class maildomainManagement extends management
         } else {
             $headpage = new listing(get_template_path("maildomain-list.xml", true));
         }
+        $headpage->registerElementFilter("maildomainCategories",   "maildomainManagement::maildomainCategories");
         $headpage->registerElementFilter("maildomainUsageCounter", "maildomainManagement::maildomainUsageCounter");
         $headpage->setFilter($filter);
 
@@ -74,6 +75,12 @@ class maildomainManagement extends management
 
         $base_of_maildomain = preg_replace ('/^[^,]+,[^,]+,/i', '', $dn);
         return(maildomain::maildomain_count_usage($associatedDomain[0], $base_of_maildomain));
+    }
+
+    static function maildomainCategories($dn, $associatedDomain)
+    {
+        $base_of_maildomain = preg_replace ('/^[^,]+,[^,]+,/i', '', $dn);
+        return(maildomain::maildomain_categories($associatedDomain[0], $base_of_maildomain));
     }
 }
 
