@@ -507,7 +507,7 @@ class maildomain extends plugin
 
         if (in_array("businessCategory", $attrs)) {
             $i_max = $attrs["businessCategory"]["count"];
-            for ($i = 0; $i <= $i_max; $i++) {
+            for ($i = 0; $i < $i_max; $i++) {
                 if ($attrs["businessCategory"][$i][0] !== NULL) {
                     $categories[]       = $maildomain_category_map[$attrs["businessCategory"][$i]];
                     $categories_short[] = strtoupper($maildomain_category_map[$attrs["businessCategory"][$i]])[0];
@@ -570,9 +570,9 @@ class maildomain extends plugin
                         // This part of the code is really CPU expensive and takes a lot of time.
                         // Array processing in PHP sucks...
                         $i_max = $attrs['count'];
-                        for ($i = 0; $i <= $i_max; $i++) {
+                        for ($i = 0; $i < $i_max; $i++) {
                             $j_max = $attrs[$attrs[$i]]['count'];
-                            for ($j = 0; $j <= $j_max; $j++) {
+                            for ($j = 0; $j < $j_max; $j++) {
                                 $mailaddress = $attrs[$attrs[$i]][$j];
                                 if ($mailaddress !== NULL) {
                                     preg_match('/.*@'.$md.'/', $mailaddress, $matches);
