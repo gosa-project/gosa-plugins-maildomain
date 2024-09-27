@@ -432,6 +432,17 @@ class maildomain extends plugin
         return ($ret);
     }
 
+
+    public function allow_remove()
+    {
+        // Don't allow removal if mail addresses still use this mail domain.
+        if ($this->countMaildomainUsage != 0) {
+            return (sprintf(_("Mail domain '%s' can't be removed, because %d mail addresses are still configured for this domain."), $this->associatedDomain, $this->countMaildomainUsage));
+        }
+        return ("");
+    }
+
+
     public function remove_from_parent()
     {
         plugin::remove_from_parent();
