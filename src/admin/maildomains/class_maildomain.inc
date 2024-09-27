@@ -124,9 +124,8 @@ class maildomain extends plugin
             $this->base= dn2base(session::global_is_set("CurrentMainBase")?"ou=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
         } else {
             $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("maildomain", "maildomainRDN"), '/')."/i", "", $this->dn);
+            $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
         }
-
-        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
 
         $this->orig_ou = $this->ou;
         $this->orig_base = $this->base;
@@ -225,7 +224,9 @@ class maildomain extends plugin
         }
 
         // How many users have a mailaddress in this mail domain?
-        $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
+        if ($this->dn !== 'new') {
+            $this->countMaildomainUsage = maildomain::maildomain_count_usage($this->associatedDomain, $this->base);
+        }
         $smarty->assign("countMaildomainUsage", $this->countMaildomainUsage);
         $smarty->assign("countMaildomainUsageACL", $this->getacl("countMaildomainUsage"));
 
