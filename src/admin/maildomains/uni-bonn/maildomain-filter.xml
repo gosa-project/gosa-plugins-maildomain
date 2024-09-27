@@ -11,7 +11,7 @@
     <default>default</default>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=domainRelatedObject)$MAILDOMAIN$ACTIVE$RETIRED$UNKNOWN)</filter>
+      <filter>(&amp;(objectClass=domainRelatedObject)$MAILDOMAIN)(|$ACTIVE$RETIRED$UNKNOWN)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>ou</attribute>
