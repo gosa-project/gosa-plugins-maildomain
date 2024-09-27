@@ -84,6 +84,7 @@ class maildomainManagement extends management
         $this->cancelEdit();
 
         $disallowed = array();
+        $still_in_use = array();
         $this->dns = array();
 
         DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel requested!");
@@ -92,14 +93,17 @@ class maildomainManagement extends management
         $h = $this->getHeadpage();
         $oTypes = array_reverse($h->objectTypes);
         foreach ($target as $dn) {
-            $entry = $h->getEntry($dn);
-            $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
-            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
-            if (preg_match("/d/", $acl)) {
+            $md    = new maildomain($this->config, $dn);
+            if ($md->acl_is_removeable()) {
                 $this->dns[] = $dn;
+            } else if ($md->countMaildomainUsage > 0) {
+                $still_in_use[] = $dn;
             } else {
                 $disallowed[] = $dn;
             }
+        }
+        if (count($still_in_use)) {
+            msg_dialog::display(_("Maildomain still in use "), sprintf(_("There are still mail addresses in use for mail domain '%s'. Please evacuate the mail domain first before removing it."), $md->associatedDomain), INFO_DIALOG);
         }
         if (count($disallowed)) {
             msg_dialog::display(_("Permission"), msgPool::permDelete($disallowed), INFO_DIALOG);
@@ -177,12 +181,10 @@ class maildomainManagement extends management
         $h = $this->getHeadpage();
         $oTypes = array_reverse($h->objectTypes);
         foreach ($this->dns as $key => $dn) {
-            $entry = $h->getEntry($dn);
-            $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
-            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
+            $md    = new maildomain($this->config, $dn);
 
             // Check permissions, are we allowed to remove this object?
-            if (preg_match("/d/", $acl)) {
+            if ($md->acl_is_removeable()) {
 
                 // Delete subobjects under ou=requests recursively (there should be no others)
                 $ldap = $this->config->get_ldap_link();
@@ -209,9 +211,12 @@ class maildomainManagement extends management
 
                 // Remove the lock for the current object.
                 del_lock($this->dn);
+            } else if ($md->countMaildomainUsage > 0) {
+                msg_dialog::display(_("Maildomain still in use "), sprintf(_("There are still mail addresses in use for mail domain '%s'. Please evacuate the mail domain first before removing it."), $md->associatedDomain), ERROR_DIALOG);
+                new log("security", "maildomains/" . get_class($this), $dn, array(), "Tried to trick deletion of mail domain that's still in use.");
             } else {
                 msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-                new log("security", "groups/" . get_class($this), $dn, array(), "Tried to trick deletion.");
+                new log("security", "maildomains/" . get_class($this), $dn, array(), "Tried to trick deletion of mail domain without sufficient privileges.");
             }
         }
 

@@ -265,6 +265,15 @@ class maildomain extends plugin
     }
 
 
+    public function acl_is_removeable($base = "")
+    {
+        if ($this->countMaildomainUsage > 0) {
+            return FALSE;
+        }
+        return parent::acl_is_removeable($base);
+    }
+
+
     // Save data to object
     public function save_object()
     {
