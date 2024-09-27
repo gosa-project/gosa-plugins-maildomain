@@ -71,6 +71,156 @@ class maildomainManagement extends management
     }
 
 
+   /*! \brief  Initiates the removal for the given entries
+     *         and displays a confirmation dialog.
+     *
+     *  @param  String  'action'  The name of the action which was the used as trigger.
+     *  @param  Array   'target'  A list of object dns, which should be affected by this method.
+     *  @param  Array   'all'     A combination of both 'action' and 'target'.
+     */
+    protected function removeEntryRequested($action = "", $target = array(), $all = array())
+    {
+        // Close dialogs and remove locks for currently handled dns
+        $this->cancelEdit();
+
+        $disallowed = array();
+        $this->dns = array();
+
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel requested!");
+
+        // Check permissons for each target
+        $h = $this->getHeadpage();
+        $oTypes = array_reverse($h->objectTypes);
+        foreach ($target as $dn) {
+            $entry = $h->getEntry($dn);
+            $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
+            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
+            if (preg_match("/d/", $acl)) {
+                $this->dns[] = $dn;
+            } else {
+                $disallowed[] = $dn;
+            }
+        }
+        if (count($disallowed)) {
+            msg_dialog::display(_("Permission"), msgPool::permDelete($disallowed), INFO_DIALOG);
+        }
+
+        // We've at least one entry to delete.
+        if (count($this->dns)) {
+
+            // check locks
+            if ($user = get_multiple_locks($this->dns)) {
+                return (gen_locked_message($user, $this->dns));
+            }
+
+            // Add locks
+            $dns = array();
+            $dns_subobjects = array();
+
+            $ldap = $this->config->get_ldap_link();
+
+            foreach ($this->dns as $dn) {
+                $dns[] = LDAP::fix($dn);
+                $ldap->cd($dn);
+                $dns_subobjects[$dn] = array();
+                $srp = $ldap->search('(&(objectClass=*)(!(associatedDomain=*)))', array('dn'));
+                while ($attrs = $ldap->fetch($srp)) {
+                    $dns_subobjects[$dn][] = LDAP::fix($attrs['dn']);
+                }
+            }
+
+            add_lock($this->dns, $this->ui->dn);
+
+            // Display confirmation dialog.
+            $smarty = get_smarty();
+            $smarty->assign("dns", $dns);
+            $smarty->assign("dns_subobjects", $dns_subobjects);
+            return ($smarty->fetch(get_template_path('maildomain-removeEntries.tpl', true)));
+        }
+    }
+
+    /*! \brief  Object removal was confirmed, now remove the requested entries.
+     *
+     *  @param  String  'action'  The name of the action which was the used as trigger.
+     *  @param  Array   'target'  A list of object dns, which should be affected by this method.
+     *  @param  Array   'all'     A combination of both 'action' and 'target'.
+     */
+    public function removeEntryConfirmed(
+        $action = "",
+        $target = array(),
+        $all = array(),
+        $altTabClass = "",
+        $altTabType = "",
+        $altAclCategory = "",
+        $altAclPlugin = ""
+    ) {
+        $tabType = $this->tabType;
+        $tabClass = $this->tabClass;
+        $aclCategory = $this->aclCategory;
+        $aclPlugin = $this->aclPlugin;
+        if (!empty($altTabClass)) {
+            $tabClass = $altTabClass;
+        }
+        if (!empty($altTabType)) {
+            $tabType = $altTabType;
+        }
+        if (!empty($altAclCategory)) {
+            $aclCategory = $altAclCategory;
+        }
+        if (!empty($altAclPlugin)) {
+            $aclPlugin = $altAclPlugin;
+        }
+
+        DEBUG(DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $target, "Entry removel confirmed!");
+
+        // Check permissons for each target
+        $h = $this->getHeadpage();
+        $oTypes = array_reverse($h->objectTypes);
+        foreach ($this->dns as $key => $dn) {
+            $entry = $h->getEntry($dn);
+            $obj   = $h->getObjectType($oTypes, $entry['objectClass']);
+            $acl = $this->ui->get_permissions($dn, $obj['category'] . "/" . $obj['class']);
+
+            // Check permissions, are we allowed to remove this object?
+            if (preg_match("/d/", $acl)) {
+
+                // Delete subobjects under ou=requests recursively (there should be no others)
+                $ldap = $this->config->get_ldap_link();
+                $ldap->cd($dn);
+                $srp = $ldap->search('(&(objectClass=organizationalUnit)(!(associatedDomain=*))(ou=requests))', array('dn'));
+                if ($ldap->count($srp) === 1) {
+                    $attrs = $ldap->fetch($srp);
+                    $ldap->rmdir_recursive(LDAP::fix($attrs['dn']));
+                }
+
+                // Delete the object
+                $this->dn = $dn;
+                $this->tabObject = new $tabClass(
+                    $this->config,
+                    $this->config->data['TABS'][$tabType],
+                    $this->dn,
+                    $aclCategory,
+                    true,
+                    true
+                );
+                $this->tabObject->set_acl_base($this->dn);
+                $this->tabObject->parent = &$this;
+                $this->tabObject->delete();
+
+                // Remove the lock for the current object.
+                del_lock($this->dn);
+            } else {
+                msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+                new log("security", "groups/" . get_class($this), $dn, array(), "Tried to trick deletion.");
+            }
+        }
+
+        // Cleanup
+        $this->remove_lock();
+        $this->closeDialogs();
+    }
+
+
     static function maildomainUsageCounter($dn, $associatedDomain)
     {
 
