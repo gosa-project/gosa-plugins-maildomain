@@ -187,7 +187,7 @@ class maildomainManagement extends management
                 // Delete subobjects under ou=requests recursively (there should be no others)
                 $ldap = $this->config->get_ldap_link();
                 $ldap->cd($dn);
-                $srp = $ldap->search('(&(objectClass=organizationalUnit)(!(associatedDomain=*))(ou=requests))', array('dn'));
+                $srp = $ldap->search('(&(objectClass=organizationalUnit)(!(associatedDomain=*)))', array('dn'));
                 if ($ldap->count($srp) === 1) {
                     $attrs = $ldap->fetch($srp);
                     $ldap->rmdir_recursive(LDAP::fix($attrs['dn']));
