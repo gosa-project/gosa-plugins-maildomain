@@ -265,6 +265,15 @@ class maildomain extends plugin
     }
 
 
+    public function acl_is_removeable($base = "")
+    {
+        if ($this->countMaildomainUsage > 0) {
+            return FALSE;
+        }
+        return parent::acl_is_removeable($base);
+    }
+
+
     // Save data to object
     public function save_object()
     {
@@ -421,6 +430,16 @@ class maildomain extends plugin
         }
 
         return ($ret);
+    }
+
+
+    public function allow_remove()
+    {
+        // Don't allow removal if mail addresses still use this mail domain.
+        if ($this->countMaildomainUsage != 0) {
+            return (sprintf(_("Mail domain '%s' can't be removed, because %d mail addresses are still configured for this domain."), $this->associatedDomain, $this->countMaildomainUsage));
+        }
+        return ("");
     }
 
 
