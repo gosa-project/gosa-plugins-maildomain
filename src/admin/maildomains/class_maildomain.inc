@@ -500,8 +500,7 @@ class maildomain extends plugin
         $srp = $ldap->search($search_filter, array("businessCategory"));
 
         $attrs = $ldap->fetch($srp);
-        // This part of the code is really CPU expensive and takes a lot of time.
-        // Array processing in PHP sucks...
+
         $categories       = [];
         $categories_short = [];
 
