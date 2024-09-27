@@ -189,6 +189,8 @@ class maildomain extends plugin
 
         if (!$this->maildomainBaseOnly) {
             $smarty->assign("base", $this->baseSelector->render());
+        } else {
+            $smarty->assign("base", NULL);
         }
 
         $maildomainActive  = "";
