@@ -396,6 +396,21 @@ class maildomain extends plugin
             new log("modify", "maildomains/".get_class($this), $this->dn, array_keys($this->attrs), $ldap->get_error());
         }
 
+        // Create ou=requests sub-ou for storing mail account applications / requests if it does not yet exist...
+        $ldap->search('ou=requests');
+        if ($ldap->count() < 1) {
+            $requests_ou_attrs = array(
+                'ou' => 'requests',
+                'objectClass' => array('top', 'organizationalUnit'),
+                'description' => sprintf(_("Mail account requests for mail domain '%s'"), $this->associatedDomain),
+            );
+            $ldap->cd('ou=requests,ou='.$this->ou.','.get_ou("maildomain", "maildomainRDN").$this->base);
+            $ldap->add($requests_ou_attrs);
+            $ldap->cd($this->dn);
+
+            new log("create", "maildomains/".get_class($this), "ou=requests,".$this->dn, array_keys($requests_ou_attrs), $ldap->get_error());
+        }
+
         // Trigger post signal
         $this->handle_post_events($mode);
 
