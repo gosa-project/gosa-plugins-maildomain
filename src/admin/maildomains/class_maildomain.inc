@@ -315,6 +315,8 @@ class maildomain extends plugin
     // Validate object data
     public function check()
     {
+        global $maildomain_category_map;
+
         // Call common method to give check the hook
         $message= plugin::check();
 
@@ -358,6 +360,15 @@ class maildomain extends plugin
         // must: ou
         if ($this->ou == "") {
             $message[]= msgPool::required(_("Mail domain"));
+        }
+
+        // businessCategory: ACTIVE, RETIRED or UNKNOWN
+        foreach($this->businessCategory as $key => $val) {
+            if (! in_array($val, array_keys($maildomain_category_map)))
+            {
+                $message[]= (_("Unsupported category found in mail domain categories, your POST request has been compromised."));
+                break;
+            }
         }
 
         if (preg_match('/[=,+<>#;]/', $this->ou)) {
