@@ -298,6 +298,10 @@ class maildomain extends plugin
             }
         }
 
+        // sort and array and make values unique
+        sort($businessCategory);
+        $businessCategory = array_unique($businessCategory);
+
         parent::save_object();
 
         $this->businessCategory = set_post($businessCategory);
