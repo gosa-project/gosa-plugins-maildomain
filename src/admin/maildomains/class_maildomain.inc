@@ -507,8 +507,7 @@ class maildomain extends plugin
                         )
                     ),
                     "plProvidedAcls"=> array(
-                        "ou"                   => _("Organizational Unit"),
-                        "associatedDomain"     => _("Mail Domain"),
+                        "ou"                   => _("Mail domain"),
                         "description"          => _("Description"),
                         "base"                 => _("Base"),
                         "businessCategory"     => _("Category"),
