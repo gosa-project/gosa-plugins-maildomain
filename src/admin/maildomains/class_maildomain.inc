@@ -286,31 +286,33 @@ class maildomain extends plugin
             $this->associatedDomain = $this->ou;
         }
 
+        parent::save_object();
+
         // Process mail domain categories
         $businessCategory = array();
 
-        if (isset($_POST['businessCategory'])) {
-            $bc = get_post('businessCategory');
-            if (is_array($bc)) {
-                $businessCategory = $bc;
-            } else {
-                $businessCategory[] = $bc;
+        if ($this->acl_is_writeable("businessCategory")) {
+            if (isset($_POST['businessCategory'])) {
+                $bc = get_post('businessCategory');
+                if (is_array($bc)) {
+                    $businessCategory = $bc;
+                } else {
+                    $businessCategory[] = $bc;
+                }
             }
-        }
-        if (isset($_POST['businessCategoryUnknown'])) {
-            $bcu = get_post('businessCategoryUnknown');
-            if (!in_array($bcu, $businessCategory)) {
-                $businessCategory[] = $bcu;
+            if (isset($_POST['businessCategoryUnknown'])) {
+                $bcu = get_post('businessCategoryUnknown');
+                if (!in_array($bcu, $businessCategory)) {
+                    $businessCategory[] = $bcu;
+                }
             }
+
+            // sort and array and make values unique
+            sort($businessCategory);
+            $businessCategory = array_unique($businessCategory);
+
+            $this->businessCategory = set_post($businessCategory);
         }
-
-        // sort and array and make values unique
-        sort($businessCategory);
-        $businessCategory = array_unique($businessCategory);
-
-        parent::save_object();
-
-        $this->businessCategory = set_post($businessCategory);
 
         if (isset($_POST['base'])) {
             $this->base = get_post('base');
