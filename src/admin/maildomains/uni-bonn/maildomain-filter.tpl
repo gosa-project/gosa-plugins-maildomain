@@ -8,6 +8,11 @@
 
   <div class="filter card-content-scroll">
     <div class="form-check">
+      {$ALL}
+      <label for="ALL">{t}All mail domains{/t}</label>
+    </div>
+
+    <div class="form-check">
       {$ACTIVE}
       <label for="ACTIVE">{t}Maildomain active{/t}</label>
     </div>
