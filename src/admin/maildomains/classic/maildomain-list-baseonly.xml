@@ -66,6 +66,7 @@
     <action>
      <type>sub</type>
      <image>images/lists/element.png[new]</image>
+     <acl>maildomains/maildomain[c]</acl>
      <label>Create</label>
 
      <action>
@@ -84,6 +85,7 @@
       <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</image>
+      <acl>maildomains/maildomain[w]</acl>
       <label>Edit</label>
     </action>
 
@@ -91,6 +93,7 @@
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</image>
+      <acl>maildomains/maildomain[d]</acl>
       <label>Remove</label>
     </action>
 
@@ -118,6 +121,7 @@
       <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</image>
+      <acl>maildomains/maildomain[w]</acl>
       <label>Edit mail domain</label>
     </action>
 
