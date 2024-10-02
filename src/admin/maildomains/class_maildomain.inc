@@ -511,9 +511,9 @@ class maildomain extends plugin
                         "description"          => _("Description"),
                         "base"                 => _("Base"),
                         "businessCategory"     => _("Category"),
-                        "createTimestamp"      => _("Creation Timestap"),
-                        "modifyTimestamp"      => _("Modification Timestap"),
-                        "countMaildomainUsage" => _("Mail addresses used in this domain"),
+                        "createTimestamp"      => _("Creation Timestap (read-only)"),
+                        "modifyTimestamp"      => _("Modification Timestap (read-only)"),
+                        "countMaildomainUsage" => _("Mail addresses used in this domain (read-only)"),
                     ),
         ));
     }
