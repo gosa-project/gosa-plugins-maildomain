@@ -683,6 +683,9 @@ class maildomain extends plugin
                         DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, join(" ", $command), "Result: ".$stdout);
                         return(trim($stdout));
                     }
+                } else {
+                    msg_dialog::display(_("Error"), sprintf(_("External command not found: %s"), $command[0]));
+                    return(_("unknown"));
                 }
             }
         }
