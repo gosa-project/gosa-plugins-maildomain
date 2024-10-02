@@ -81,6 +81,7 @@
       <name>new</name>
       <type>entry</type>
       <image>bi-envelope-at</image>
+      <acl>maildomains/maildomain[c]</acl>
       <label>Mail Domain</label>
      </action>
     </action>
@@ -94,6 +95,7 @@
         <name>edit</name>
         <type>entry</type>
         <image>bi-pencil</image>
+        <acl>maildomains/maildomain[w]</acl>
         <label>Edit</label>
       </action>
 
@@ -101,6 +103,7 @@
         <name>remove</name>
         <type>entry</type>
         <image>bi-trash3</image>
+        <acl>maildomains/maildomain[d]</acl>
         <label>Remove</label>
       </action>
     </action>
@@ -121,6 +124,7 @@
       <name>edit</name>
       <type>entry</type>
       <image>bi-pencil</image>
+      <acl>maildomains/maildomain[w]</acl>
       <label>Edit mail domain</label>
     </action>
 

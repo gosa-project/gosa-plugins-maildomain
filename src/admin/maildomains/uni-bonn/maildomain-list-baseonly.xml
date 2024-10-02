@@ -66,8 +66,8 @@
     <action>
      <type>sub</type>
      <image>bi-plus</image>
+     <acl>maildomains/maildomain[c]</acl>
      <label>Create</label>
-
      <action>
       <name>new</name>
       <type>entry</type>
@@ -85,6 +85,7 @@
         <name>edit</name>
         <type>entry</type>
         <image>bi-pencil</image>
+        <acl>maildomains/maildomain[w]</acl>
         <label>Edit</label>
       </action>
 
@@ -92,6 +93,7 @@
         <name>remove</name>
         <type>entry</type>
         <image>bi-trash3</image>
+        <acl>maildomains/maildomain[d]</acl>
         <label>Remove</label>
       </action>
     </action>
@@ -112,6 +114,7 @@
       <name>edit</name>
       <type>entry</type>
       <image>bi-pencil</image>
+      <acl>maildomains/maildomain[w]</acl>
       <label>Edit mail domain</label>
     </action>
 
