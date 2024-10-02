@@ -14,17 +14,17 @@
 
     <div class="form-check">
       {$ACTIVE}
-      <label for="ACTIVE">{t}Maildomain active{/t}</label>
+      <label for="ACTIVE">{t}Mail domain actively used{/t}</label>
     </div>
 
     <div class="form-check">
       {$RETIRED}
-      <label for="RETIRED">{t}Maildomain retired{/t}</label>
+      <label for="RETIRED">{t}Mail domain retired{/t}</label>
     </div>
 
     <div class="form-check">
       {$UNKNOWN}
-      <label for="UNKNOWN">{t}Maildomain unknown to mailsystem{/t}</label>
+      <label for="UNKNOWN">{t}Mail domain unknown to mailsystem{/t}</label>
     </div>
 
     <hr class="divider">
