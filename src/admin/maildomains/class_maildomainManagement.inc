@@ -28,11 +28,11 @@ class maildomainManagement extends management
     var $matIcon        = "domain";
 
     // Tab definition
-    protected $tabClass = "maildomaintabs";
-    protected $tabType = "MAILDOMAINTABS";
+    protected $tabClass    = "maildomaintabs";
+    protected $tabType     = "MAILDOMAINTABS";
     protected $aclCategory = "maildomains";
     protected $aclPlugin   = "maildomain";
-    protected $objectName   = "maildomain";
+    protected $objectName  = "maildomain";
 
     function __construct($config, $ui)
     {
