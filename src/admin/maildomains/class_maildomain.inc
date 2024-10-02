@@ -277,8 +277,14 @@ class maildomain extends plugin
     // Save data to object
     public function save_object()
     {
-        // Sync ou value to associatedMailDomain value...
-        $this->associatedDomain = $this->ou;
+        if (
+            (($this->dn == "new") && ($this->acl_is_createable())) ||
+            ($this->acl_is_writeable("ou"))
+           )
+        {
+            // Sync ou value to associatedMailDomain value...
+            $this->associatedDomain = $this->ou;
+        }
 
         // Process mail domain categories
         $businessCategory = array();
