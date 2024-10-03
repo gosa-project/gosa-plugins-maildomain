@@ -212,7 +212,7 @@ msgstr "Aktiv genutzte e-Mail Domäne"
 #: src/admin/maildomains/uni-bonn/maildomain.tpl:44
 #: src/admin/maildomains/classic/maildomain.tpl:52
 msgid "Retired email domain"
-msgstr "Nicht mehr verwendete e-Mail Domäne"
+msgstr "Stillgelegte e-Mail Domäne"
 
 #: src/admin/maildomains/default/maildomain.tpl:47
 #: src/admin/maildomains/uni-bonn/maildomain.tpl:51
