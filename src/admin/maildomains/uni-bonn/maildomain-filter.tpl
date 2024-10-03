@@ -31,7 +31,7 @@
 
     <div class="row">
       <label for="MAILDOMAIN" class="col-sm-6 col-form-label">
-        <i class="bi bi-search"></i>Mail Domain
+        <i class="bi bi-search"></i>{t}Mail Domain{/t}
       </label>
 
       <div class="col-sm-6 input-field">
