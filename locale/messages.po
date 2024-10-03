@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 13:12+0200\n"
+"POT-Creation-Date: 2024-10-03 07:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,123 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/admin/maildomains/default/maildomain-removeEntries.tpl:7
+#: src/admin/maildomains/classic/maildomain-removeEntries.tpl:4
+msgid "Attention"
+msgstr ""
+
+#: src/admin/maildomains/default/maildomain-removeEntries.tpl:10
+#: src/admin/maildomains/classic/maildomain-removeEntries.tpl:11
+msgid "This object and its subobjects will be deleted:"
+msgstr ""
+
+#: src/admin/maildomains/default/maildomain-removeEntries.tpl:12
+#: src/admin/maildomains/classic/maildomain-removeEntries.tpl:13
+msgid "These objects and their sub-objects will be deleted:"
+msgstr ""
+
+#: src/admin/maildomains/default/maildomain-removeEntries.tpl:31
+#: src/admin/maildomains/classic/maildomain-removeEntries.tpl:32
+msgid ""
+"If you're sure you want to do this press 'Delete' to continue or 'Cancel' to "
+"abort."
+msgstr ""
+
 #: src/admin/maildomains/default/maildomain-list.xml:11
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:11
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:11
 #: src/admin/maildomains/classic/maildomain-list.xml:11
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:11
 msgid "List of Mail Domains"
 msgstr ""
 
 #: src/admin/maildomains/default/maildomain-list.xml:15
 #: src/admin/maildomains/default/maildomain.tpl:10
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:15
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:8
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:15
 #: src/admin/maildomains/classic/maildomain-list.xml:15
 #: src/admin/maildomains/classic/maildomain.tpl:11
-#: src/admin/maildomains/class_maildomain.inc:203
-#: src/admin/maildomains/class_maildomain.inc:207
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:15
+#: src/admin/maildomains/class_maildomain.inc:370
+#: src/admin/maildomains/class_maildomain.inc:383
+#: src/admin/maildomains/class_maildomain.inc:510
 msgid "Mail domain"
 msgstr ""
 
 #: src/admin/maildomains/default/maildomain-list.xml:41
-#: src/admin/maildomains/default/maildomain-list.xml:74
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:41
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:74
+#: src/admin/maildomains/default/maildomain-list.xml:85
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:32
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:76
 #: src/admin/maildomains/classic/maildomain-list.xml:41
-#: src/admin/maildomains/classic/maildomain-list.xml:74
-#: src/admin/maildomains/class_maildomain.inc:176
-#: src/admin/maildomains/class_maildomain.inc:309
+#: src/admin/maildomains/classic/maildomain-list.xml:85
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:32
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:76
+#: src/admin/maildomains/class_maildomain.inc:344
 msgid "Mail Domain"
 msgstr ""
 
 #: src/admin/maildomains/default/maildomain-list.xml:49
 #: src/admin/maildomains/default/maildomain.tpl:17
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:49
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:17
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:40
 #: src/admin/maildomains/classic/maildomain-list.xml:49
 #: src/admin/maildomains/classic/maildomain.tpl:19
-#: src/admin/maildomains/class_maildomain.inc:310
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:40
+#: src/admin/maildomains/class_maildomain.inc:511
 msgid "Description"
 msgstr ""
 
 #: src/admin/maildomains/default/maildomain-list.xml:57
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:57
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:48
 #: src/admin/maildomains/classic/maildomain-list.xml:57
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:48
+msgid "Categories"
+msgstr ""
+
+#: src/admin/maildomains/default/maildomain-list.xml:62
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:53
+#: src/admin/maildomains/classic/maildomain-list.xml:62
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:53
+msgid "#Aliases"
+msgstr ""
+
+#: src/admin/maildomains/default/maildomain-list.xml:67
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:58
+#: src/admin/maildomains/classic/maildomain-list.xml:67
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:58
 msgid "Actions"
 msgstr ""
 
-#: src/admin/maildomains/default/maildomain-list.xml:68
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:68
-#: src/admin/maildomains/classic/maildomain-list.xml:68
+#: src/admin/maildomains/default/maildomain-list.xml:79
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:70
+#: src/admin/maildomains/classic/maildomain-list.xml:79
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:70
 msgid "Create"
 msgstr ""
 
-#: src/admin/maildomains/default/maildomain-list.xml:86
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:87
-#: src/admin/maildomains/classic/maildomain-list.xml:86
+#: src/admin/maildomains/default/maildomain-list.xml:98
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:89
+#: src/admin/maildomains/classic/maildomain-list.xml:98
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:89
 msgid "Edit"
 msgstr ""
 
-#: src/admin/maildomains/default/maildomain-list.xml:93
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:94
-#: src/admin/maildomains/classic/maildomain-list.xml:93
+#: src/admin/maildomains/default/maildomain-list.xml:106
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:97
+#: src/admin/maildomains/classic/maildomain-list.xml:106
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:97
 msgid "Remove"
 msgstr ""
 
-#: src/admin/maildomains/default/maildomain-list.xml:120
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:114
-#: src/admin/maildomains/classic/maildomain-list.xml:120
+#: src/admin/maildomains/default/maildomain-list.xml:134
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:125
+#: src/admin/maildomains/classic/maildomain-list.xml:134
 #: src/admin/maildomains/classic/maildomain.tpl:1
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:125
 msgid "Edit mail domain"
 msgstr ""
 
-#: src/admin/maildomains/default/maildomain-list.xml:133
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:127
-#: src/admin/maildomains/classic/maildomain-list.xml:133
+#: src/admin/maildomains/default/maildomain-list.xml:147
+#: src/admin/maildomains/default/maildomain-list-baseonly.xml:138
+#: src/admin/maildomains/classic/maildomain-list.xml:147
+#: src/admin/maildomains/classic/maildomain-list-baseonly.xml:138
 msgid "Remove mail domain"
 msgstr ""
 
@@ -98,33 +143,35 @@ msgid "Default filter"
 msgstr ""
 
 #: src/admin/maildomains/default/maildomain.tpl:5
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:4
 #: src/admin/maildomains/classic/maildomain.tpl:6
-#: src/admin/maildomains/class_maildomain.inc:289
+#: src/admin/maildomains/class_maildomain.inc:491
 msgid "Generic"
 msgstr ""
 
-#: src/admin/maildomains/uni-bonn/maildomain-list.xml:81
-msgid "Manage"
+#: src/admin/maildomains/default/maildomain.tpl:32
+#: src/admin/maildomains/classic/maildomain.tpl:65
+msgid "Mail addresses used in this domain"
 msgstr ""
 
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:25
-#: src/admin/maildomains/classic/maildomain-list.tpl:12
-#: src/admin/maildomains/classic/maildomain.tpl:29
-#: src/admin/maildomains/class_maildomain.inc:311
-msgid "Base"
+#: src/admin/maildomains/default/maildomain.tpl:38
+#: src/admin/maildomains/classic/maildomain.tpl:45
+#: src/admin/maildomains/class_maildomain.inc:513
+msgid "Category"
 msgstr ""
 
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:29
-msgid "Choose subtree to place mail domain in"
+#: src/admin/maildomains/default/maildomain.tpl:41
+#: src/admin/maildomains/classic/maildomain.tpl:49
+msgid "Actively maintained email domain"
 msgstr ""
 
-#: src/admin/maildomains/uni-bonn/maildomain.tpl:36
-msgid "Select a base"
+#: src/admin/maildomains/default/maildomain.tpl:44
+#: src/admin/maildomains/classic/maildomain.tpl:52
+msgid "Retired email domain"
 msgstr ""
 
-#: src/admin/maildomains/main.inc:48 src/admin/maildomains/main.inc:55
-msgid "Mail Domain Management"
+#: src/admin/maildomains/default/maildomain.tpl:47
+#: src/admin/maildomains/classic/maildomain.tpl:55
+msgid "Unknown in email system"
 msgstr ""
 
 #: src/admin/maildomains/class_maildomainManagement.inc:25
@@ -132,34 +179,108 @@ msgid "Mail Domains"
 msgstr ""
 
 #: src/admin/maildomains/class_maildomainManagement.inc:26
-msgid "Mail domain management."
+msgid "Mail domain management"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomainManagement.inc:106
+#: src/admin/maildomains/class_maildomainManagement.inc:215
+msgid "Maildomain still in use "
+msgstr ""
+
+#: src/admin/maildomains/class_maildomainManagement.inc:106
+#: src/admin/maildomains/class_maildomainManagement.inc:215
+#, php-format
+msgid ""
+"There are still mail addresses in use for mail domain '%s'. Please evacuate "
+"the mail domain first before removing it."
+msgstr ""
+
+#: src/admin/maildomains/class_maildomainManagement.inc:109
+msgid "Permission"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomainManagement.inc:218
+msgid "Permission error"
+msgstr ""
+
+#: src/admin/maildomains/classic/maildomain-list.tpl:12
+#: src/admin/maildomains/classic/maildomain.tpl:30
+#: src/admin/maildomains/class_maildomain.inc:512
+msgid "Base"
 msgstr ""
 
 #: src/admin/maildomains/classic/maildomain.tpl:9
 msgid "Generic settings"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:113
+#: src/admin/maildomains/class_maildomain.inc:40
+msgid "active"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:41
+msgid "retired"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:42
+#: src/admin/maildomains/class_maildomain.inc:681
+msgid "unknown"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:160
 msgid "mail domain"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:260
-#: src/admin/maildomains/class_maildomain.inc:274
+#: src/admin/maildomains/class_maildomain.inc:377
+msgid ""
+"Unsupported category found in mail domain categories, your POST request has "
+"been compromised."
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:437
+#, php-format
+msgid "Mail account requests for mail domain '%s'"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:451
+#: src/admin/maildomains/class_maildomain.inc:476
 msgid "LDAP error"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:290
+#: src/admin/maildomains/class_maildomain.inc:463
+#, php-format
+msgid ""
+"Mail domain '%s' can't be removed, because %d mail addresses are still "
+"configured for this domain."
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:492
 msgid "Mail domain generic"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:303
+#: src/admin/maildomains/class_maildomain.inc:505
 msgid "Mail domains"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:308
-msgid "Organizational Unit"
+#: src/admin/maildomains/class_maildomain.inc:514
+msgid "Creation Timestap (read-only)"
 msgstr ""
 
-#: src/admin/maildomains/class_maildomain.inc:331
+#: src/admin/maildomains/class_maildomain.inc:515
+msgid "Modification Timestap (read-only)"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:516
+msgid "Mail addresses used in this domain (read-only)"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:536
 msgid "RDN for maildomains."
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:546
+msgid "Only allow maildomains at top-level BaseDN."
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:680
+msgid "Error"
 msgstr ""
