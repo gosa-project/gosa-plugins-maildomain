@@ -35,11 +35,13 @@ global $maildomain_count_usage_phpldapsearch_counterlimit;
 // Not recommended to go beyond 100 search result array-deep-divings (see below)
 $maildomain_count_usage_phpldapsearch_counterlimit  = 100;
 
+// See also at end of maildomain::maildomain_categories(), the array gets redefined there
+// with localized values.
 global $maildomain_category_map;
 $maildomain_category_map = [
-    "ACTIVE"  => _("active"),
-    "RETIRED" => _("retired"),
-    "UNKNOWN" => _("unknown"),
+    "ACTIVE"  => "active",
+    "RETIRED" => "retired",
+    "UNKNOWN" => "unknown",
 ];
 
 class maildomain extends plugin
@@ -553,6 +555,16 @@ class maildomain extends plugin
     {
         global $config;
         global $maildomain_category_map;
+
+        // Re-define maildomain_category_map, using localized values
+        // This is necessary, because the definition at the top of
+        // this file gets executed before the gettext domain has been
+        // configured.
+        $maildomain_category_map = [
+            "ACTIVE"  => _("active"),
+            "RETIRED" => _("retired"),
+            "UNKNOWN" => _("unknown"),
+        ];
 
         $ldap = $config->get_ldap_link();
         $ldap->cd($base);
