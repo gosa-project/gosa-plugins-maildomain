@@ -176,7 +176,7 @@ msgstr "Aktiv genutzte e-Mail Domäne"
 #: src/admin/maildomains/default/maildomain.tpl:44
 #: src/admin/maildomains/classic/maildomain.tpl:52
 msgid "Retired email domain"
-msgstr "Nicht mehr verwendete e-Mail Domäne"
+msgstr "Stillgelegte e-Mail Domäne"
 
 #: src/admin/maildomains/default/maildomain.tpl:47
 #: src/admin/maildomains/classic/maildomain.tpl:55
@@ -231,7 +231,7 @@ msgstr "aktiv"
 
 #: src/admin/maildomains/class_maildomain.inc:41
 msgid "retired"
-msgstr "nicht mehr verwendet"
+msgstr "stillgelegt"
 
 #: src/admin/maildomains/class_maildomain.inc:42
 #: src/admin/maildomains/class_maildomain.inc:681
