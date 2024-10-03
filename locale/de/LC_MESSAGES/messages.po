@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-03 07:43+0200\n"
-"PO-Revision-Date: 2024-10-03 08:00+0200\n"
+"POT-Creation-Date: 2024-10-03 08:06+0200\n"
+"PO-Revision-Date: 2024-10-03 08:07+0200\n"
 "Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -235,6 +235,7 @@ msgstr "nicht mehr verwendet"
 
 #: src/admin/maildomains/class_maildomain.inc:42
 #: src/admin/maildomains/class_maildomain.inc:681
+#: src/admin/maildomains/class_maildomain.inc:688
 msgid "unknown"
 msgstr "unbekannt"
 
@@ -298,8 +299,14 @@ msgid "Only allow maildomains at top-level BaseDN."
 msgstr "Mail-Domänen nur auf oberster Ebene (Basis DN) erlauben."
 
 #: src/admin/maildomains/class_maildomain.inc:680
+#: src/admin/maildomains/class_maildomain.inc:687
 msgid "Error"
 msgstr "Fehler"
+
+#: src/admin/maildomains/class_maildomain.inc:687
+#, php-format
+msgid "External command not found: %s"
+msgstr "Externes Kommando nicht gefunden: %s"
 
 #~ msgid "Manage"
 #~ msgstr "Verwalten"

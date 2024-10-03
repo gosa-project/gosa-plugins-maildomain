@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-03 07:43+0200\n"
+"POT-Creation-Date: 2024-10-03 08:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,6 +223,7 @@ msgstr ""
 
 #: src/admin/maildomains/class_maildomain.inc:42
 #: src/admin/maildomains/class_maildomain.inc:681
+#: src/admin/maildomains/class_maildomain.inc:688
 msgid "unknown"
 msgstr ""
 
@@ -282,5 +283,11 @@ msgid "Only allow maildomains at top-level BaseDN."
 msgstr ""
 
 #: src/admin/maildomains/class_maildomain.inc:680
+#: src/admin/maildomains/class_maildomain.inc:687
 msgid "Error"
+msgstr ""
+
+#: src/admin/maildomains/class_maildomain.inc:687
+#, php-format
+msgid "External command not found: %s"
 msgstr ""

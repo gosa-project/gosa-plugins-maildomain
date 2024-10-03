@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-03 07:43+0200\n"
-"PO-Revision-Date: 2024-10-03 07:44+0200\n"
+"POT-Creation-Date: 2024-10-03 08:06+0200\n"
+"PO-Revision-Date: 2024-10-03 08:06+0200\n"
 "Last-Translator: Mike Gabriel <mike.gabriel@das-netzwerkteam.de>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -227,6 +227,7 @@ msgstr "retired"
 
 #: src/admin/maildomains/class_maildomain.inc:42
 #: src/admin/maildomains/class_maildomain.inc:681
+#: src/admin/maildomains/class_maildomain.inc:688
 msgid "unknown"
 msgstr "unknown"
 
@@ -290,8 +291,14 @@ msgid "Only allow maildomains at top-level BaseDN."
 msgstr "Only allow maildomains at top-level BaseDN."
 
 #: src/admin/maildomains/class_maildomain.inc:680
+#: src/admin/maildomains/class_maildomain.inc:687
 msgid "Error"
 msgstr "Error"
+
+#: src/admin/maildomains/class_maildomain.inc:687
+#, php-format
+msgid "External command not found: %s"
+msgstr "External command not found: %s"
 
 #~ msgid "Manage"
 #~ msgstr "Manage"
