@@ -580,7 +580,7 @@ class maildomain extends plugin
         if (in_array("businessCategory", $attrs)) {
             $i_max = $attrs["businessCategory"]["count"];
             for ($i = 0; $i < $i_max; $i++) {
-                if ($attrs["businessCategory"][$i][0] !== NULL) {
+                if (isset($attrs["businessCategory"][$i]) && isset($maildomain_category_map[$attrs["businessCategory"][$i]])) {
                     $categories[]       = $maildomain_category_map[$attrs["businessCategory"][$i]];
                     $categories_short[] = strtoupper($maildomain_category_map[$attrs["businessCategory"][$i]])[0];
                 }
