@@ -65,5 +65,5 @@ ldapsearch -x -H "${ldap_uri}"    \
               -D "${ldap_binddn}"  \
               -w "${ldap_bindpw}"  \
              "(&(objectClass=gosaAccount)(|(mail=*@$maildomain)(mailAlias=*@${maildomain})(mailSubdomainAlias=*@${maildomain})(alias=*@$maildomain)))" 'mail' 'alias' 'mailAlias' 'mailSubdomainAlias' \
-    | grep -E "^(mail|alias|mailAlias|mailSubdomainAlias): .*@$maildomain" \
+    | grep -iE "^(mail|alias|mailAlias|mailSubdomainAlias): .*@$maildomain" \
     | wc -l
